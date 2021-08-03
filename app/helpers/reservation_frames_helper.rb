@@ -1,0 +1,2 @@
+module ReservationFramesHelper
+end
