@@ -12,34 +12,34 @@
 
 ActiveRecord::Schema.define(version: 2021_07_28_163326) do
 
-  create_table "reservation_frames", force: :cascade do |t|
-    t.bigint "planner_id", null: false
-    t.bigint "time_frame_id", null: false
-    t.datetime "reserved_at", null: false
-    t.string "status", null: false
+  create_table "reservation_frames", charset: "utf8", force: :cascade do |t|
+    t.bigint "planner_id", null: false, comment: "Plannerテーブルのid"
+    t.bigint "time_frame_id", null: false, comment: "TimeFrameテーブルのid"
+    t.datetime "reserved_at", null: false, comment: "予約日時"
+    t.string "status", null: false, comment: "空き状況"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "reservations", force: :cascade do |t|
-    t.bigint "client_id", null: false
-    t.bigint "reservation_frame_id", null: false
+  create_table "reservations", charset: "utf8", force: :cascade do |t|
+    t.bigint "client_id", null: false, comment: "Clientテーブルのid"
+    t.bigint "reservation_frame_id", null: false, comment: "ReservationFrameテーブルのid"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "time_frames", force: :cascade do |t|
-    t.datetime "start_at", null: false
-    t.datetime "end_at", null: false
+  create_table "time_frames", charset: "utf8", force: :cascade do |t|
+    t.datetime "start_at", null: false, comment: "開始日時"
+    t.datetime "end_at", null: false, comment: "終了日時"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "users", force: :cascade do |t|
-    t.string "email", null: false
-    t.string "password", null: false
-    t.string "name", default: "氏名未登録"
-    t.string "type", null: false
+  create_table "users", charset: "utf8", force: :cascade do |t|
+    t.string "email", null: false, comment: "メールアドレス"
+    t.string "password_digest", null: false, comment: "パスワード"
+    t.string "name", default: "氏名未登録", comment: "氏名"
+    t.string "type", null: false, comment: "ユーザータイプ"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
