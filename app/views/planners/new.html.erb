@@ -1,2 +1,23 @@
 <h1>Planners#new</h1>
 <p>Find me in app/views/planners/new.html.erb</p>
+<%= flash[:notice] %>
+<center>
+  <%= form_for(:planner, url: planners_path) do |f| %>
+    <div>
+      <%= f.label :email, "メール" %>
+      <p><%= f.email_field :email %></p>
+    </div>
+    <div>
+      <%= f.label :password, "パスワード" %>
+      <p><%= f.password_field :password, required: true%></P>
+    </div>
+    <div>
+      <%= f.label :password_confirmation, "確認用パスワード" %>
+      <p><%= f.password_field :password_confirmation, required: true%></p>
+    </div>
+    <div>
+      <%= f.submit "SIGN UP" %>
+    </div>
+  <% end %>
+</center>
+
