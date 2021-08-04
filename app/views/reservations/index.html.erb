@@ -1,2 +1,8 @@
 <h1>Reservations#index</h1>
 <p>Find me in app/views/reservations/index.html.erb</p>
+<%= flash[:notice] %>
+<% if signed_in? %>
+  <%= render 'clients/signed_in' %>
+<% else %>
+  <%= render 'clients/not_signed_in' %>
+<% end %>
