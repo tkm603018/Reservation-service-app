@@ -20,7 +20,7 @@ class PlannersController < ApplicationController
       else
         redirect_to reservation_frames_path, notice: '未登録です'
       end
-    elsif params[:commit] == "SIGN UP"
+    elsif params[:commit] == "サインアップ"
       if planner
         redirect_to new_planner_path, notice: '登録済です'
       else
