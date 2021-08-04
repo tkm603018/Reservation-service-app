@@ -13,22 +13,28 @@ class ClientsController < ApplicationController
 
   def create
     client = Client.find_by(email: params[:client][:email])
-    if params[:commit] == "SIGN IN"
+    if params[:commit] == "サインイン"
       if client && client.authenticate(params[:client][:password])
         sign_in client
         redirect_to reservations_path, notice: 'ログイン中'
       else
         redirect_to reservations_path, notice: '未登録です'
       end
-    elsif params[:commit] == "SIGN UP"
+    elsif params[:commit] == "サインアップ"
       if client
         redirect_to new_client_path, notice: '登録済です'
       else
-        Client.create!(
+        client = Client.new(
           email: params[:client][:email],
-          password: params[:client][:password]
+          password: params[:client][:password],
+          password_confirmation: params[:client][:password_confirmation]
         )
-        redirect_to reservations_path, notice: '登録しました'
+        if client.valid?
+          client.save!
+          redirect_to reservations_path, notice: '登録しました'
+        else
+          redirect_to reservations_path, notice: client.errors.messages
+        end
       end
     end
   end
