@@ -12,15 +12,15 @@ class SessionsController < ApplicationController
 
   def destroy
     sign_out
-    type = User.find(params[:id]).type
-    if type == 'Client'
+    if User.user_type(params[:id]) == 'Client'
       redirect_to reservations_path
-    elsif type == 'Planner'
+    elsif User.user_type(params[:id]) == 'Planner'
       redirect_to reservation_frames_path
     end
   end
 
   private
+
   def user_path
     if current_user.type == 'Client'
       return reservations_path
@@ -28,5 +28,4 @@ class SessionsController < ApplicationController
       return reservation_frames_path
     end
   end
-
 end
