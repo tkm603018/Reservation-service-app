@@ -12,9 +12,9 @@ class SessionsController < ApplicationController
 
   def destroy
     sign_out
-    if User.user_type(params[:id]) == 'Client'
+    if User.user_type(params[:id]).is_client?
       redirect_to reservations_path
-    elsif User.user_type(params[:id]) == 'Planner'
+    elsif User.user_type(params[:id]).is_planner?
       redirect_to reservation_frames_path
     end
   end
@@ -22,9 +22,9 @@ class SessionsController < ApplicationController
   private
 
   def user_path
-    if current_user.type == 'Client'
+    if current_user.is_client?
       return reservations_path
-    elsif current_user.type == 'Planner'
+    elsif current_user.is_planner?
       return reservation_frames_path
     end
   end
