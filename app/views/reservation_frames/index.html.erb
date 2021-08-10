@@ -2,7 +2,10 @@
 <p>Find me in app/views/reservation_frames/index.html.erb</p>
 <%= flash[:notice] %>
 <% if signed_in? %>
-  <%= render 'planners/signed_in' %>
+  <%= render 'sessions/signed_in' %>
 <% else %>
-  <%= render 'planners/not_signed_in' %>
+  <%= render 'sessions/not_signed_in' %>
+  <h1>登録</h1>
+  <div><%= link_to "プランナー登録", new_planner_path%></div>
 <% end %>
+
