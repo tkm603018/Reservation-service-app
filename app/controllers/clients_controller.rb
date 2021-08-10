@@ -12,6 +12,7 @@ class ClientsController < ApplicationController
   def create
     client = Client.find_by(email: params[:client][:email])
     return redirect_to new_client_path, alert: '登録済です' if client
+    
     client = Client.new(
       email: params[:client][:email],
       password: params[:client][:password],
