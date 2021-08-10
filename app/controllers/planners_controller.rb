@@ -1,6 +1,4 @@
 class PlannersController < ApplicationController
-  include PlannersHelper
-  before_action :signed_in_planner, only:[:destroy]
 
   def index
   end
@@ -13,36 +11,21 @@ class PlannersController < ApplicationController
 
   def create
     planner = Planner.find_by(email: params[:planner][:email])
-    if params[:commit] == "サインイン"
-      if planner && planner.authenticate(params[:planner][:password])
-        sign_in planner
-        redirect_to reservation_frames_path, notice: 'ログイン中'
-      else
-        redirect_to reservation_frames_path, notice: '未登録です'
-      end
-    elsif params[:commit] == "サインアップ"
-      if planner
-        redirect_to new_planner_path, notice: '登録済です'
-      else
-        Planner.create!(
-          email: params[:planner][:email],
-          password: params[:planner][:password]
-        )
+    if planner
+      redirect_to new_planner_path, notice: '登録済です'
+    else
+      planner = Planner.new(
+        email: params[:planner][:email],
+        password: params[:planner][:password],
+        password_confirmation: params[:planner][:password_confirmation]
+      )
+      if planner.valid?
+        planner.save!
         redirect_to reservation_frames_path, notice: '登録しました'
+      else
+        redirect_to reservation_frames_path, notice: planner.errors.messages
       end
     end
   end
 
-  def destroy
-    sign_out
-    redirect_to reservation_frames_path
-  end
-
-  private
-  # ログイン済みユーザーかどうか確認
-    def signed_in_planner
-      unless signed_in?
-        redirect_to new_planner_url
-      end
-    end
 end
