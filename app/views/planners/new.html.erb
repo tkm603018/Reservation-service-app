@@ -1,6 +1,7 @@
 <h1>Planners#new</h1>
 <p>Find me in app/views/planners/new.html.erb</p>
 <%= flash[:notice] %>
+<%= flash[:alert] %>
 <%= form_for(:planner, url: planners_path) do |f| %>
   <div>
     <%= f.label :email, "メール" %>

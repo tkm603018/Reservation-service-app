@@ -1,6 +1,7 @@
 <h1>ReservationFrames#index</h1>
 <p>Find me in app/views/reservation_frames/index.html.erb</p>
 <%= flash[:notice] %>
+<%= flash[:alert] %>
 <% if signed_in? %>
   <%= render 'sessions/signed_in' %>
 <% else %>

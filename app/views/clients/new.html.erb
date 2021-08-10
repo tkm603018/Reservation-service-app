@@ -1,6 +1,7 @@
 <h1>Clients#new</h1>
 <p>Find me in app/views/clients/new.html.erb</p>
 <%= flash[:notice] %>
+<%= flash[:alert] %>
 <%= form_for(:client, url: clients_path) do |f| %>
   <div>
     <%= f.label :email, "メール" %>
