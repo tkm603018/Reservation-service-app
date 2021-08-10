@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
       sign_in user
       redirect_to user_path, notice: 'ログイン中'
     else
-      redirect_to user_path, notice: '未登録です'
+      redirect_to user_path, alert: '未登録です'
     end
   end
 

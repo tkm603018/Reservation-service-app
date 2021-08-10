@@ -23,7 +23,7 @@ class PlannersController < ApplicationController
         planner.save!
         redirect_to reservation_frames_path, notice: '登録しました'
       else
-        redirect_to reservation_frames_path, notice: planner.errors.messages
+        redirect_to reservation_frames_path, alert: planner.errors.messages
       end
     end
   end
