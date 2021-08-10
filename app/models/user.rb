@@ -7,7 +7,15 @@ class User < ApplicationRecord
 
   class << self
     def user_type(id)
-      return User.find(id).type
+      User.find(id)
     end
+  end
+
+  def is_client?
+    type == 'Client'
+  end
+
+  def is_planner?
+    type == 'Planner'
   end
 end
