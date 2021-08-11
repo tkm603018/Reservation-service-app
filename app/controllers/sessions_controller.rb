@@ -23,9 +23,9 @@ class SessionsController < ApplicationController
 
   def user_path
     if current_user.is_client?
-      return reservations_path
+      reservations_path
     elsif current_user.is_planner?
-      return reservation_frames_path
+      reservation_frames_path
     end
   end
 end
