@@ -7,14 +7,14 @@ class ReservationFramesController < ApplicationController
   end
 
   def create
-    redirect_to reservation_frames_path, alert: "ログインするかユーザー登録してください" and return if !current_user
+    flash[:alert] = "ログインするかユーザー登録してください" and return if !current_user
 
     args = params.require(:reservation_frame)
     d = Date.parse(args[:date])
     s = Time.parse(args[:start_at])
     e = Time.parse(args[:end_at])
 
-    redirect_to new_reservation_frame_path, alert: "日付を今日以降に設定してしてください" and return if d < Time.now
+    flash[:alert] = "日付を今日以降に設定してしてください" and return if d < Time.now
 
     @start_at = Time.local(d.year, d.month, d.day, s.hour, s.min, s.sec)
     @end_at = Time.local(d.year, d.month, d.day, e.hour, e.min, e.sec)
@@ -26,7 +26,7 @@ class ReservationFramesController < ApplicationController
       check_time(st, en)
       round_time
     elsif dow == 'Sun'
-      redirect_to new_reservation_frame_path, alert: "日曜日は休業日です" and return
+      flash[:alert] = "日曜日は休業日です" and return
     else
       st = Time.local(d.year, d.month, d.day, 10)
       en = Time.local(d.year, d.month, d.day, 18)
@@ -42,7 +42,7 @@ class ReservationFramesController < ApplicationController
       if time_frame.valid?
         time_frame.save
       else
-        redirect_to reservation_frames_path, alert: time_frame.errors.messages and return
+        flash[:alert] = time_frame.errors.messages and return
       end
 
       reservation_frame = ReservationFrame.new(
@@ -54,17 +54,17 @@ class ReservationFramesController < ApplicationController
       if reservation_frame.valid?
         reservation_frame.save
       else
-        redirect_to reservation_frames_path, alert: reservation_frame.errors.messages and return
+        flash[:alert] = reservation_frame.errors.messages and return
       end
     }
 
-    redirect_to reservation_frames_path, notice: '登録しました' and return
+    redirect_to new_reservation_frame_path, notice: !flash[:alert] && "登録しました" and return
   end
 
   private
 
   def check_time(st, en)
-    redirect_to new_reservation_frame_path, alert: "予約日時が範囲外です" and return if @start_at < st && @end_at < en
+    flash[:alert] = "予約日時が範囲外です" and return if @start_at < st && @end_at < en
   end
 
   def round_time
@@ -84,7 +84,7 @@ class ReservationFramesController < ApplicationController
       @round_end_at = @end_at
     end
 
-    redirect_to new_reservation_frame_path, alert: "時間帯を正しく設定してください" and return if reservation_frames_count < 1
+    flash[:alert] = "時間帯を正しく設定してください" and return if reservation_frames_count < 1
   end
 
   def reservation_frames_count
