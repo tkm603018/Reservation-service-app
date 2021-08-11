@@ -1,0 +1,14 @@
+<h1>not logined</h1>
+<h1>ログイン</h1>
+<%= form_for(:session, url: sessions_path) do |f| %>
+  <div>
+    <%= f.label :email, "メール" %>
+    <p><%= f.email_field :email %></p>
+  </div>
+  <div>
+    <%= f.label :password, "パスワード" %>
+    <p><%= f.password_field :password, required: true%></P>
+  </div>
+    <%= f.submit "サインイン" %>
+  </div>
+<% end %>
