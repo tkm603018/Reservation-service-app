@@ -1,2 +1,13 @@
 <h1>Reservations#new</h1>
 <p>Find me in app/views/reservations/new.html.erb</p>
+<div>
+  <%= form_for(:reservation_frame) do |f| %>
+    <div>
+      <%= f.label "予約開始時刻"%>
+        <p><%= f.datetime_field "予約開始時刻" %></p>
+    </div>
+    <div>
+      <%= f.submit %>
+    </div>
+  <% end %>
+</div>
