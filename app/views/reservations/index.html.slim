@@ -1,0 +1,14 @@
+h1
+  | Reservations#index
+p
+  | Find me in app/views/reservations/index.html.erb
+= flash[:notice]
+= flash[:alert]
+- if signed_in?
+  = render 'sessions/signed_in'
+- else
+  = render 'sessions/not_signed_in'
+  h1
+    | 登録
+  div
+    = link_to "ユーザー登録", new_client_path
