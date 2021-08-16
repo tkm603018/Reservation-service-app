@@ -1,0 +1,21 @@
+h1
+  | Planners#new
+p
+  | Find me in app/views/planners/new.html.erb
+= flash[:notice]
+= flash[:alert]
+= form_for(:planner, url: planners_path) do |f|
+  div
+    = f.label :email, "メール"
+    p
+      = f.email_field :email
+  div
+    = f.label :password, "パスワード"
+    p
+      = f.password_field :password, required: true
+  div
+    = f.label :password_confirmation, "確認用パスワード"
+    p
+      = f.password_field :password_confirmation, required: true
+  div
+    = f.submit "サインアップ"
