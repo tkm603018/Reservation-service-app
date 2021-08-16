@@ -1,4 +1,5 @@
 class ReservationFramesController < ApplicationController
+  before_action :signed_in_planner, only: [:new, :create]
 
   def index
   end
@@ -7,14 +8,10 @@ class ReservationFramesController < ApplicationController
   end
 
   def create
-    flash[:alert] = "ログインするかユーザー登録してください" and return if !current_user
-
     args = params.require(:reservation_frame)
-    d = Date.parse(args[:date])
+    d = Date.parse(args[:reserved_date])
     s = Time.parse(args[:start_at])
     e = Time.parse(args[:end_at])
-
-    flash[:alert] = "日付を今日以降に設定してしてください" and return if d < Time.now
 
     @start_at = Time.local(d.year, d.month, d.day, s.hour, s.min, s.sec)
     @end_at = Time.local(d.year, d.month, d.day, e.hour, e.min, e.sec)
@@ -25,8 +22,6 @@ class ReservationFramesController < ApplicationController
       en = Time.local(d.year, d.month, d.day, 15)
       check_time(st, en)
       round_time
-    elsif dow == 'Sun'
-      flash[:alert] = "日曜日は休業日です" and return
     else
       st = Time.local(d.year, d.month, d.day, 10)
       en = Time.local(d.year, d.month, d.day, 18)
@@ -42,29 +37,29 @@ class ReservationFramesController < ApplicationController
       if time_frame.valid?
         time_frame.save
       else
-        flash[:alert] = time_frame.errors.messages and return
+        flash[:alert] = time_frame.errors.messages
       end
 
       reservation_frame = ReservationFrame.new(
         planner_id: current_user.id,
         time_frame_id: time_frame.id,
-        date: d,
+        reserved_date: d,
         status: args[:status],
       )
       if reservation_frame.valid?
         reservation_frame.save
       else
-        flash[:alert] = reservation_frame.errors.messages and return
+        flash[:alert] = reservation_frame.errors.messages
       end
     }
 
-    redirect_to new_reservation_frame_path, notice: !flash[:alert] && "登録しました" and return
+    redirect_to new_reservation_frame_path, notice: !flash[:alert] && "登録しました"
   end
 
   private
 
   def check_time(st, en)
-    flash[:alert] = "予約日時が範囲外です" and return if @start_at < st && @end_at < en
+    flash[:alert] = {time_frame: "予約日時が範囲外です"} if @start_at < st && @end_at < en
   end
 
   def round_time
@@ -84,10 +79,17 @@ class ReservationFramesController < ApplicationController
       @round_end_at = @end_at
     end
 
-    flash[:alert] = "時間帯を正しく設定してください" and return if reservation_frames_count < 1
+    flash[:alert] = {time_frame: "時間帯を正しく設定してください"} if reservation_frames_count < 1
   end
 
   def reservation_frames_count
     (@round_end_at - @round_start_at)/1800
+  end
+
+  def signed_in_planner
+    unless signed_in?
+      flash[:alert] = {user: "ログインするかユーザー登録してください"}
+      redirect_to reservation_frames_path
+    end
   end
 end
