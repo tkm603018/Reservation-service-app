@@ -1,12 +1,10 @@
 class ReservationFramesController < ApplicationController
-  before_action :signed_in_planner, only: [:new, :create]
+  before_action :signed_in_user, only: [:new, :create]
 
   def index
   end
 
   def new
-    a = Time.local(2021, 1, 1, 10)
-    @def_time_frame = (0..15).map{|i| "#{t_format(a + 30.minute * i)}-#{t_format(a + 30.minute * (i+1))}"}
   end
 
   def create
@@ -35,8 +33,7 @@ class ReservationFramesController < ApplicationController
       flash[:alert] = time_frame.errors.messages
     end
 
-    reservation_frame = ReservationFrame.new(
-      planner_id: current_user.id,
+    reservation_frame = current_user.reservation_frames.build(
       time_frame_id: time_frame.id,
       reserved_date: d,
       status: args[:status],
@@ -48,11 +45,5 @@ class ReservationFramesController < ApplicationController
     end
 
     redirect_to new_reservation_frame_path, notice: !flash[:alert] && "登録しました"
-  end
-
-  private
-
-  def t_format(x)
-    x.strftime("%H:%M")
   end
 end
