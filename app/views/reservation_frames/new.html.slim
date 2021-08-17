@@ -11,13 +11,9 @@ div
       p
         = f.date_field :reserved_date, value: "%m:%d", required: true
     div
-      = f.label :start_at, "開始時刻"
+      = f.label :time_frame, "時刻"
       p
-        = f.time_field :start_at, value: "%H:%M", required: true
-    div
-      = f.label :end_at, "終了時刻"
-      p
-        = f.time_field :end_at, value: "%H:%M", required: true
+        = f.select :time_frame, @def_time_frame
     div
       |  空き状況 
       p
