@@ -2,3 +2,25 @@ h1
   | Reservations#new
 p
   | Find me in app/views/reservations/new.html.erb
+= notice
+= alert
+
+h2 = "予約枠"
+div
+  - if @reservation_frames.present?
+    table
+      tr
+        th = "日付"
+        th = "開始日時"
+        th = "予約ボタン"
+      - @reservation_frames.map do |r| 
+        tr
+          td = r[:reserved_date].strftime("20%y/%m/%d")
+          td = r[:start_at].strftime("%H:%M")
+          td 
+            - if r[:reserved]
+              = "予約済"
+            - else
+              = link_to "予約する", reservations_path(r[:id]), method: :post, data: {confirm: "本当に予約しますか?"}, class: "btn"
+  - else
+    = "現在、予約枠は登録されていません"
