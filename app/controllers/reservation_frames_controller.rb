@@ -20,7 +20,7 @@ class ReservationFramesController < ApplicationController
     if d.saturday?
       st = Time.local(2021, 1, 1, 11)
       en = Time.local(2021, 1, 1, 15)
-      flash[:alert] = {time_frame: "予約日時が範囲外です"} if @start_at < st || @end_at > en
+      flash[:alert] = "予約日時が範囲外です" if @start_at < st || @end_at > en
     end
 
     time_frame = TimeFrame.new(
