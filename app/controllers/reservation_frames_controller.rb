@@ -14,28 +14,17 @@ class ReservationFramesController < ApplicationController
     s = t[0].split(":")
     e = t[1].split(":")
 
-    @start_at = Time.local(2021, 1, 1, s[0].to_i, s[1].to_i)
-    @end_at = Time.local(2021, 1, 1, e[0].to_i, e[1].to_i)
+    @start_at = Time.local(d.year, d.month, d.day, s[0].to_i, s[1].to_i)
+    @end_at = Time.local(d.year, d.month, d.day, e[0].to_i, e[1].to_i)
     
     if d.saturday?
-      st = Time.local(2021, 1, 1, 11)
-      en = Time.local(2021, 1, 1, 15)
-      flash[:alert] = "予約日時が範囲外です" if @start_at < st || @end_at > en
-    end
-
-    time_frame = TimeFrame.new(
-      start_at: @start_at,
-      end_at: @end_at
-    )
-    if time_frame.valid?
-      time_frame.save
-    else
-      flash[:alert] = time_frame.errors.messages
+      st = Time.local(d.year, d.month, d.day, 11)
+      en = Time.local(d.year, d.month, d.day, 14, 30)
+      flash[:alert] = "予約日時が範囲外です" if @start_at < st || @start_at > en
     end
 
     reservation_frame = current_user.reservation_frames.build(
-      time_frame_id: time_frame.id,
-      reserved_date: d,
+      reserved_at: @start_at,
       status: args[:status],
     )
     if reservation_frame.valid?

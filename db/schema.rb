@@ -14,9 +14,8 @@ ActiveRecord::Schema.define(version: 2021_07_28_163326) do
 
   create_table "reservation_frames", charset: "utf8", force: :cascade do |t|
     t.bigint "planner_id", null: false, comment: "Plannerテーブルのid"
-    t.bigint "time_frame_id", null: false, comment: "TimeFrameテーブルのid"
-    t.date "reserved_date", null: false, comment: "予約日"
-    t.string "status", null: false, comment: "空き状況"
+    t.datetime "reserved_at", null: false, comment: "予約日時"
+    t.string "status", null: false, comment: "表示"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -24,13 +23,6 @@ ActiveRecord::Schema.define(version: 2021_07_28_163326) do
   create_table "reservations", charset: "utf8", force: :cascade do |t|
     t.bigint "client_id", null: false, comment: "Clientテーブルのid"
     t.bigint "reservation_frame_id", null: false, comment: "ReservationFrameテーブルのid"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "time_frames", charset: "utf8", force: :cascade do |t|
-    t.time "start_at", null: false, comment: "開始日時"
-    t.time "end_at", null: false, comment: "終了日時"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
