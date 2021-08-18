@@ -3,7 +3,7 @@ class CreateReservationFrames < ActiveRecord::Migration[6.1]
     create_table :reservation_frames do |t|
       t.bigint :planner_id,       null: false, comment: "Plannerテーブルのid"
       t.bigint :time_frame_id,    null: false, comment: "TimeFrameテーブルのid"
-      t.datetime :reserved_at,    null: false, comment: "予約日時"
+      t.date :reserved_date,      null: false, comment: "予約日"
       t.string :status,           null: false, comment: "空き状況"
 
       t.timestamps

@@ -2,3 +2,24 @@ h1
   | ReservationFrames#new
 p
   | Find me in app/views/reservation_frames/new.html.erb
+= notice
+= alert
+div
+  = form_for(:reservation_frame, url: "/reservation_frames") do |f|
+    div
+      = f.label :reserved_date, "日付"
+      p
+        = f.date_field :reserved_date, value: "%m:%d", required: true
+    div
+      = f.label :time_frame, "時刻"
+      p
+        = f.select :time_frame, def_time_frame
+    div
+      |  空き状況 
+      p
+        = f.label :status, "対応可能", value: "OK"
+        = f.radio_button :status, "OK", required: true
+        = f.label :status, "対応不可能", value: "NG"
+        = f.radio_button :status, "NG", required: true
+    div
+      = f.submit "登録"
