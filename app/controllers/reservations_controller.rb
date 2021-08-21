@@ -6,7 +6,7 @@ class ReservationsController < ApplicationController
 
   def new
     m = ReservationFrame.all.filter{|a| 
-          a.reserved_at > Time.now + 30.minute && a.status == "OK"
+          a.reserved_at > Time.now && a.status == "OK"
         }.sort{|a, b| 
           a.reserved_at <=> b.reserved_at
         }.map{|x| [
