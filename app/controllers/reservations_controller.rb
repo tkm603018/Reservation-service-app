@@ -5,16 +5,17 @@ class ReservationsController < ApplicationController
   end
 
   def new
-    m = []
-    reserved_dates =  ReservationFrame.all.order(reserved_date: "ASC").map{|x| x.reserved_date}.uniq
-    reserved_dates.map{|d| 
-      m.concat(ReservationFrame.where(reserved_date: d).where(status: "OK").map{|a| [
-      id: a.id, 
-      reserved_date: a.reserved_date,
-      start_at: a.time_frame.start_at,
-      reserved: Reservation.where(reservation_frame_id: a.id).present?
-      ]}.sort{|a, b| a[0][:start_at] <=> b[0][:start_at]})}
-    @reservation_frames = m.map{|a| a[0]}
+    m = ReservationFrame.all.filter{|a| 
+          a.reserved_at > Time.now + 30.minute && a.status == "OK"
+        }.sort{|a, b| 
+          a.reserved_at <=> b.reserved_at
+        }.map{|x| [
+          id: x.id, 
+          reserved_at: x.reserved_at, 
+          planner_name: Planner.find(x.planner_id).name,
+          reserved: Reservation.where(reservation_frame_id: x.id).present?
+        ]}
+    @reservation_frames = m.map{|m| m[0]}
   end
 
   def create
