@@ -1,9 +1,7 @@
-h1
-  | Clients#new
-p
-  | Find me in app/views/clients/new.html.erb
-= flash[:notice]
-= flash[:alert]
+h1 = link_to "ホームへ", reservations_path
+
+h2 クライアント作成フォーム
+
 = form_for(:client, url: clients_path) do |f|
   div
     = f.label :email, "メール"
