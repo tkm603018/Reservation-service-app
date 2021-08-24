@@ -10,17 +10,15 @@ div
   - if @reservation_frames.present?
     table
       tr
-        th = "日付"
         th = "開始日時"
         th = "プランナー"
         th = "予約ボタン"
       - @reservation_frames.map do |r| 
         tr
-          td = r[:reserved_at].strftime("20%y/%m/%d")
-          td = r[:reserved_at].strftime("%H:%M")
-          td = r[:planner_name]
+          td = l r[:reserved_at], format: :default
+          td = r.planner.name
           td
-            - if r[:reserved]
+            - if r.reservations.present?
               = "予約済"
             - else
               = link_to "予約する", reservations_path(r[:id]), method: :post, data: {confirm: "本当に予約しますか?"}, class: "btn"
