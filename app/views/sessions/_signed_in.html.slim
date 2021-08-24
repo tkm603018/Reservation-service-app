@@ -1,3 +1,2 @@
-h1
-  | logined
-= link_to "ログアウト", session_path(@current_user.id), method: :delete
+h1 = link_to "ホームへ", user_path
+p = link_to "ログアウト", session_path(@current_user.id), method: :delete
