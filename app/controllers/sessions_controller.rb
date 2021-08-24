@@ -19,13 +19,4 @@ class SessionsController < ApplicationController
     end
   end
 
-  private
-
-  def user_path
-    if current_user.is_client?
-      reservations_path
-    elsif current_user.is_planner?
-      reservation_frames_path
-    end
-  end
 end
