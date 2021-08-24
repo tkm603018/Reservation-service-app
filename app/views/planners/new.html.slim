@@ -1,9 +1,7 @@
-h1
-  | Planners#new
-p
-  | Find me in app/views/planners/new.html.erb
-= flash[:notice]
-= flash[:alert]
+h1 = link_to "ホームへ", reservation_frames_path
+
+h2 プランナー作成フォーム
+
 = form_for(:planner, url: planners_path) do |f|
   div
     = f.label :email, "メール"
