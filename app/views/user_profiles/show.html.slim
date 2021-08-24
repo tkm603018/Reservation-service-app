@@ -1,0 +1,17 @@
+- if signed_in?
+  = render 'sessions/signed_in'
+
+  h1 = "プロフィール"
+  - if @profile.present?
+    table
+      tr
+        th = "ID:"
+        th = @profile.id
+      tr
+        th = "email:"
+        th
+          = @profile.email
+      tr
+        th = "氏名:"
+        th = @profile.name
+- else
