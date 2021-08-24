@@ -5,7 +5,7 @@ class ReservationsController < ApplicationController
   end
 
   def new
-    @reservation_frames = ReservationFrame.after_current_time.status_ok.sort_datetime_asc
+    @reservation_frames = ReservationFrame.after_current_time.status_ok.sort_reserved_at_asc
   end
 
   def create
