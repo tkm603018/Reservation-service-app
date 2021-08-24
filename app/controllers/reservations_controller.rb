@@ -22,6 +22,7 @@ class ReservationsController < ApplicationController
     reservation = current_user.reservations.build(
       reservation_frame_id: params[:format]
     )
+    
     if reservation.valid?
       reservation.save
     else
