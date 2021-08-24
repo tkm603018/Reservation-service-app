@@ -10,7 +10,7 @@ class ReservationFrame < ApplicationRecord
   enum status: ["ng", "ok"], _prefix: true
 
   scope :after_current_time, -> { where('reserved_at > ?', Time.now) }
-  scope :sort_datetime_asc, -> { order(reserved_at: "ASC") }
+  scope :sort_reserved_at_asc, -> { order(reserved_at: "ASC") }
 
   private
   
