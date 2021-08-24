@@ -1,11 +1,6 @@
-h1
-  | Reservations#new
-p
-  | Find me in app/views/reservations/new.html.erb
-= notice
-= alert
+= render 'sessions/signed_in'
 
-h2 = "予約枠"
+h2 予約枠一覧
 div
   - if @reservation_frames.present?
     table
