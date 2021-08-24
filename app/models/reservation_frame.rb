@@ -7,11 +7,10 @@ class ReservationFrame < ApplicationRecord
   validate :date_valid?
   validate :dow_valid?
 
-  enum status: ["ng", "ok"]
+  enum status: ["ng", "ok"], _prefix: true
 
-  scope :active, -> { where(status: 1) }
-  scope :filtered, -> { where('reserved_at > ?', Time.now) }
-  scope :sorted, -> { sort{| a, b| a.reserved_at <=> b.reserved_at} }
+  scope :after_current_time, -> { where('reserved_at > ?', Time.now) }
+  scope :sort_datetime_asc, -> { order(reserved_at: "ASC") }
 
   private
   
