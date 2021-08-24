@@ -15,7 +15,7 @@ ActiveRecord::Schema.define(version: 2021_07_28_163326) do
   create_table "reservation_frames", charset: "utf8", force: :cascade do |t|
     t.bigint "planner_id", null: false, comment: "Plannerテーブルのid"
     t.datetime "reserved_at", null: false, comment: "予約日時"
-    t.string "status", null: false, comment: "表示"
+    t.integer "status", default: 0, null: false, comment: "表示"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
