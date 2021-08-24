@@ -5,17 +5,7 @@ class ReservationsController < ApplicationController
   end
 
   def new
-    m = ReservationFrame.all.filter{|a| 
-          a.reserved_at > Time.now && a.status == "OK"
-        }.sort{|a, b| 
-          a.reserved_at <=> b.reserved_at
-        }.map{|x| [
-          id: x.id, 
-          reserved_at: x.reserved_at, 
-          planner_name: Planner.find(x.planner_id).name,
-          reserved: Reservation.where(reservation_frame_id: x.id).present?
-        ]}
-    @reservation_frames = m.map{|m| m[0]}
+    @reservation_frames = ReservationFrame.filtered.active.sorted
   end
 
   def create
