@@ -9,17 +9,15 @@
   - if @reservations.present?
     table
       tr
-        th = "開始日時"
-        th = "プランナー"
+        th 開始日時
+        th プランナー
       - @reservations.map do |r| 
         tr
           td = l(r.reservation_frame.reserved_at, format: :default)
           td = r.reservation_frame.planner.name
   - else
-    = "現在、予約枠は登録されていません"
+    div 現在、予約枠は登録されていません
 - else
   = render 'sessions/not_signed_in'
-  h2
-    | 登録
-  div
-    = link_to "ユーザー登録へ", new_client_path
+  h2 登録
+  div = link_to "ユーザー登録へ", new_client_path
