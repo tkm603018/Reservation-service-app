@@ -1,14 +1,23 @@
-h1
-  | Reservations#index
-p
-  | Find me in app/views/reservations/index.html.erb
-= flash[:notice]
-= flash[:alert]
 - if signed_in?
   = render 'sessions/signed_in'
+  p = link_to "プロフィールへ", user_profile_path
+  p = link_to "プランナー一覧へ", planners_path
+  p = link_to "予約する", new_reservation_path
+
+  h2 予約一覧
+
+  - if @reservations.present?
+    table
+      tr
+        th 開始日時
+        th プランナー
+      - @reservations.map do |r| 
+        tr
+          td = l(r.reservation_frame.reserved_at, format: :default)
+          td = r.reservation_frame.planner.name
+  - else
+    div 現在、予約枠は登録されていません
 - else
   = render 'sessions/not_signed_in'
-  h1
-    | 登録
-  div
-    = link_to "ユーザー登録", new_client_path
+  h2 登録
+  div = link_to "ユーザー登録へ", new_client_path

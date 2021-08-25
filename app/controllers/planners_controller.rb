@@ -1,9 +1,12 @@
 class PlannersController < ApplicationController
 
   def index
+    @planners = Planner.all
   end
 
   def show
+    @planner = Planner.find(params[:id])
+    @reservation_frames = ReservationFrame.after_current_time.status_ok.sort_reserved_at_asc
   end
 
   def new

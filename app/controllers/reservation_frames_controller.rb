@@ -2,6 +2,7 @@ class ReservationFramesController < ApplicationController
   before_action :signed_in_user, only: [:new, :create]
 
   def index
+    @reservation_frames = current_user&.reservation_frames
   end
 
   def new

@@ -1,9 +1,6 @@
-h1
-  | ReservationFrames#new
-p
-  | Find me in app/views/reservation_frames/new.html.erb
-= notice
-= alert
+= render 'sessions/signed_in'
+
+h1 予約枠作成フォーム
 div
   = form_for(:reservation_frame, url: "/reservation_frames") do |f|
     div

@@ -1,0 +1,16 @@
+- if signed_in?
+  = render 'sessions/signed_in'
+
+  h1 プロフィール
+  - if current_user.present?
+    table
+      tr
+        th ID:
+        th = current_user.id
+      tr
+        th email:
+        th = current_user.email
+      tr
+        th 氏名:
+        th = current_user.name
+- else
