@@ -2,7 +2,6 @@ class ReservationFramesController < ApplicationController
   before_action :signed_in_user, only: [:new, :create]
 
   def index
-    @reservation_frames = current_user && current_user.reservation_frames.after_current_time.sort_reserved_at_asc
   end
 
   def new
@@ -38,16 +37,17 @@ class ReservationFramesController < ApplicationController
   end
 
   def update
-    if ReservationFrame.find(params[:id]).status_ok?
-      ReservationFrame.find(params[:id]).update(status: "ng")
+    reservation_frame = ReservationFrame.find(params[:id])
+    if reservation_frame.status_ok?
+      reservation_frame.status_ng!
     else
-      ReservationFrame.find(params[:id]).update(status: "ok")
+      reservation_frame.status_ok!
     end
       redirect_to reservation_frames_path, notice: '表示を切り替えました'
   end
 
   def destroy
-    ReservationFrame.find(params[:id]).delete
+    ReservationFrame.find(params[:id]).destroy
     redirect_to reservation_frames_path, notice: '削除しました'
   end
 end
