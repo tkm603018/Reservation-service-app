@@ -6,7 +6,7 @@ class PlannersController < ApplicationController
 
   def show
     @planner = Planner.find(params[:id])
-    @reservation_frames = ReservationFrame.after_current_time.status_ok.sort_reserved_at_asc
+    @reservation_frames = ReservationFrame.where(planner_id: params[:id]).after_current_time.status_ok.sort_reserved_at_asc
   end
 
   def new
@@ -28,4 +28,5 @@ class PlannersController < ApplicationController
       redirect_to reservation_frames_path, alert: planner.errors.messages
     end
   end
+
 end
