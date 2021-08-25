@@ -5,19 +5,19 @@
 
   h2 予約枠一覧
 
-  - if @reservation_frames.present?
+  - if current_user
     table
       tr
         th 開始日時
         th 表示切替ボタン
         th 削除ボタン
-      - @reservation_frames.map do |f| 
+      - current_user.reservation_frames.after_current_time.sort_reserved_at_asc.map do |f| 
         tr
           td = l(f[:reserved_at], format: :default)
           td 
             = f.status + " : "
             = link_to "変更する", reservation_frame_path(f), method: :put, class: "btn"
-          td = link_to "削除する", reservation_frame_path(current_user.id), method: :delete, data: {confirm: "本当に削除しますか?"}, class: "btn"
+          td = link_to "削除する", reservation_frame_path(f), method: :delete, data: {confirm: "本当に削除しますか?"}, class: "btn"
   - else
     div 現在、予約枠は登録されていません
 
