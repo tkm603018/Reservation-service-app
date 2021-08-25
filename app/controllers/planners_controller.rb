@@ -6,7 +6,7 @@ class PlannersController < ApplicationController
 
   def show
     @planner = Planner.find(params[:id])
-    @reservation_frames = ReservationFrame.where(planner_id: params[:id]).after_current_time.status_ok.sort_reserved_at_asc
+    @reservation_frames = @planner.reservation_frames.after_current_time.status_ok.sort_reserved_at_asc
   end
 
   def new
