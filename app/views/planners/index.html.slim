@@ -6,20 +6,14 @@
   - if @planners.present?
     table
       tr
-        th
-          = "email"
-        th
-          = "氏名"
-        th
-          = "リンク"
+        th email
+        th 氏名
+        th リンク
       - @planners.map do |p|
         tr
-          th
-            = p.email
-          th
-            = p.name
-          th
-            = link_to "予約枠一覧へ", planner_path(p.id)
+          th = p.email
+          th = p.name
+          th = link_to "予約枠一覧へ", planner_path(p)
 - else
   = render 'sessions/not_signed_in'
   h2
