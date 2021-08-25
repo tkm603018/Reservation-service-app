@@ -2,7 +2,7 @@ class ReservationFramesController < ApplicationController
   before_action :signed_in_user, only: [:new, :create]
 
   def index
-    @reservation_frames = current_user && ReservationFrame.where(planner_id: current_user.id)
+    @reservation_frames = current_user && current_user.reservation_frames
   end
 
   def new
