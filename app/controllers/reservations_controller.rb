@@ -25,7 +25,7 @@ class ReservationsController < ApplicationController
   end
 
   def destroy
-    Reservation.find(params[:id]).delete
+    Reservation.find(params[:id]).destroy
     redirect_to reservations_path, notice: '削除しました'
   end
 end
