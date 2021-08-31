@@ -2,7 +2,6 @@ class ReservationFramesController < ApplicationController
   before_action :signed_in_user, only: [:new, :create]
 
   def index
-    @reservation_frames = current_user&.reservation_frames
   end
 
   def new
@@ -35,5 +34,20 @@ class ReservationFramesController < ApplicationController
     end
 
     redirect_to new_reservation_frame_path, notice: !flash[:alert] && "登録しました"
+  end
+
+  def update
+    reservation_frame = ReservationFrame.find(params[:id])
+    if reservation_frame.status_ok?
+      reservation_frame.status_ng!
+    else
+      reservation_frame.status_ok!
+    end
+      redirect_to reservation_frames_path, notice: '表示を切り替えました'
+  end
+
+  def destroy
+    ReservationFrame.find(params[:id]).destroy
+    redirect_to reservation_frames_path, notice: '削除しました'
   end
 end

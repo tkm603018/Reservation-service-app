@@ -6,16 +6,14 @@ div
     table
       tr
         th 開始日時
-        th プランナー
         th 予約ボタン
-      - @reservation_frames.map do |r| 
+      - @reservation_frames.map do |f| 
         tr
-          td = l(r[:reserved_at], format: :default)
-          td = r.planner.name
+          td = l(f[:reserved_at], format: :default)
           td
-            - if r.reservations.present?
+            - if f.reservations.present?
               span 予約済
             - else
-              = link_to "予約する", reservations_path(r[:id]), method: :post, data: {confirm: "本当に予約しますか?"}, class: "btn"
+              = link_to "予約する", reservations_path(f[:id]), method: :post, data: {confirm: "本当に予約しますか?"}, class: "btn"
   - else
     div 現在、予約枠は登録されていません

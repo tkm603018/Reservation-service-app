@@ -2,7 +2,8 @@ class ReservationsController < ApplicationController
   before_action :signed_in_user, only: [:new, :create]
 
   def index
-    @reservations = current_user&.reservations
+    reservation_frame_ids = Reservation.where(client_id: current_user&.id).pluck(:reservation_frame_id)
+    @reservation_frames = ReservationFrame.after_current_time.status_ok.sort_reserved_at_asc.where(id: reservation_frame_ids)
   end
 
   def new
@@ -20,6 +21,11 @@ class ReservationsController < ApplicationController
       flash[:alert] = reservation.errors.messages
     end
 
-    redirect_to new_reservation_path, notice: !flash[:alert] && "登録しました"
+    redirect_to request.referer, notice: !flash[:alert] && "登録しました"
+  end
+
+  def destroy
+    Reservation.find(params[:id]).destroy
+    redirect_to reservations_path, notice: '削除しました'
   end
 end
