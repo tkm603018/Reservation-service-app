@@ -19,6 +19,8 @@ module SessionsHelper
   end
 
   def user_root_path
+    return request.referer if current_user.blank?
+    
     if current_user.is_client?
       reservations_path
     elsif current_user.is_planner?
