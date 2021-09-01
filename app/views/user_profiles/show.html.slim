@@ -12,7 +12,11 @@
           td = current_user.email
         tr
           th class='text-center' 氏名
-          td = current_user.name
+          td
+            = form_for(:user, url: "/#{current_user.type.downcase}s/#{current_user.id}", method: :put, html: { class: 'd-flex justify-content-start' }) do |f|
+              div class='form-control me-2 w-50'
+                = f.text_field :name, value: current_user.name, class: 'form-control', required: true
+              = f.submit '変更する', class: 'btn btn-outline-success'
 - else
   div class='navbar navbar-expand-lg navbar-light bg-light p-3 px-md-4 mb-3'
     div class='container-fluid'
