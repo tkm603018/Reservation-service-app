@@ -1,29 +1,29 @@
 - if signed_in?
-  div class="signed_in"
+  div class='signed_in'
     = render 'sessions/signed_in'
-    div class="mx-5"
-      ul class="nav flex-column pb-4"
-        li class="nav-item mb-3"
-          = link_to "プランナー一覧へ >", planners_path, class: "text-decoration-none"
-        li class="nav-item mb-3"
-          = link_to "予約する >", new_reservation_path, class: "text-decoration-none"
+    div class='mx-5'
+      ul class='nav flex-column pb-4'
+        li class='nav-item mb-3'
+          = link_to 'プランナー一覧へ >', planners_path, class: 'text-decoration-none'
+        li class='nav-item mb-3'
+          = link_to '予約する >', new_reservation_path, class: 'text-decoration-none'
 
-      h2 class="fw-bold pb-1" 予約一覧
+      h2 class='fw-bold pb-1' 予約一覧
       - if @reservation_frames.present?
-        table class="table text-center"
+        table class='table text-center'
           tr
-            th scope="col" 開始日時
-            th scope="col" プランナー
-            th scope="col" キャンセルボタン
+            th scope='col' 開始日時
+            th scope='col' プランナー
+            th scope='col' キャンセルボタン
           - @reservation_frames.map do |f| 
             tr
               td = l(f.reserved_at, format: :default)
               td = f.planner.name
-              td = link_to "キャンセルする", reservation_path(f.reservations.first), method: :delete, data: {confirm: "本当にキャンセルしますか?"}, class: "btn btn-outline-danger"
+              td = link_to 'キャンセルする', reservation_path(f.reservations.first), method: :delete, data: {confirm: '本当にキャンセルしますか?'}, class: 'btn btn-outline-danger'
       - else
         div 現在、予約枠は登録されていません
 - else
-  div class="form-sign"
+  div class='form-sign'
     = render 'sessions/not_signed_in'
-    h2 class="fw-bold" 登録
-    div = link_to "ユーザー登録へ", new_client_path, class: "text-decoration-none"
+    h2 class='fw-bold' 登録
+    div = link_to 'ユーザー登録へ', new_client_path, class: 'text-decoration-none'
