@@ -4,7 +4,7 @@ class SessionsController < ApplicationController
     user = User.find_by(email: params[:session][:email])
     if user && user.authenticate(params[:session][:password])
       sign_in user
-      redirect_to user_path, notice: 'ログイン中'
+      redirect_to user_path, notice: 'サインイン中'
     else
       redirect_to user_path, alert: '未登録です'
     end
