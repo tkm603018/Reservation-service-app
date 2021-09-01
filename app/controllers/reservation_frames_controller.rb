@@ -10,9 +10,9 @@ class ReservationFramesController < ApplicationController
   def create
     args = params.require(:reservation_frame)
     d = Date.parse(args[:reserved_date])
-    t = args[:time_frame].split("-")
-    s = t[0].split(":")
-    e = t[1].split(":")
+    t = args[:time_frame].split('-')
+    s = t[0].split(':')
+    e = t[1].split(':')
 
     @start_at = Time.local(d.year, d.month, d.day, s[0].to_i, s[1].to_i)
     @end_at = Time.local(d.year, d.month, d.day, e[0].to_i, e[1].to_i)
