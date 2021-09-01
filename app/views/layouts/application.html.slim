@@ -3,12 +3,14 @@ html
   head
     title
       | SampleApp1
-    meta[name="viewport" content="width=device-width,initial-scale=1"]
+    meta[name='viewport' content='width=device-width,initial-scale=1']
     = csrf_meta_tags
     = csp_meta_tag
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
   body
-    p = notice
-    p = alert
+    - if notice
+      div class='alert alert-success text-center' = notice
+    - if alert
+      div class='alert alert-danger text-center' = alert
     = yield

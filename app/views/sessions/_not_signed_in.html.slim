@@ -1,14 +1,9 @@
-h1
-  | ようこそ
-h2
-  | ログイン
-= form_for(:session, url: sessions_path) do |f|
-  div
-    = f.label :email, "メール"
-    p
-      = f.email_field :email
-  div
-    = f.label :password, "パスワード"
-    p
-      = f.password_field :password, required: true
-  = f.submit "サインイン"
+= form_for(:session, url: sessions_path, html: { class: 'mb-5 form-sign' }) do |f|
+  h2 class='fw-bold mb-3' ようこそ
+  div class='form-floating mb-3'
+    = f.email_field :email, class: 'form-control', id: 'floatingInput', placeholder: 'Email', required: true
+    = f.label 'Email', for: 'floatingInput'
+  div class='form-floating mb-5'
+    = f.password_field :password, class: 'form-control', id: 'floatingPassword', placeholder: 'Password', required: true
+    = f.label :password, for: 'floatingPassword'
+  = f.submit 'サインインする', class: 'btn btn-lg btn-primary'
