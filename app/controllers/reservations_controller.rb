@@ -21,7 +21,7 @@ class ReservationsController < ApplicationController
       flash[:alert] = reservation.errors.messages
     end
 
-    redirect_to request.referer, notice: !flash[:alert] && "登録しました"
+    redirect_to request.referer, notice: !flash[:alert] && '登録しました'
   end
 
   def destroy
