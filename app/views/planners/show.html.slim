@@ -1,23 +1,23 @@
 = render 'sessions/signed_in'
 
-div class="mx-5"
-  ul class="nav flex-column pb-4"
-    li class="nav-item mb-3"
-      = link_to "< プランナー一覧へ", planners_path, class: "text-decoration-none"
-  h2 class="fw-bold pb-1" = @planner.name + "の予約枠一覧"
+div class='mx-5'
+  ul class='nav flex-column pb-4'
+    li class='nav-item mb-3'
+      = link_to '< プランナー一覧へ', planners_path, class: 'text-decoration-none'
+  h2 class='fw-bold pb-1' = @planner.name + 'の予約枠一覧'
   div
     - if @reservation_frames.present?
-      table class="table"
+      table class='table'
         tr
-          th scope="col" 開始日時
-          th scope="col" 予約ボタン
+          th scope='col' 開始日時
+          th scope='col' 予約ボタン
         - @reservation_frames.map do |f| 
           tr
             td = l(f[:reserved_at], format: :default)
             td
               - if f.reservations.present?
-                button.gray[ class="btn btn-secondary" disabled=true ] 予約済み
+                button.gray[ class='btn btn-secondary' disabled=true ] 予約済み
               - else
-                = link_to "予約する", reservations_path(f[:id]), method: :post, data: {confirm: "本当に予約しますか?"}, class: "btn btn-outline-primary"
+                = link_to '予約する', reservations_path(f[:id]), method: :post, data: {confirm: '本当に予約しますか?'}, class: 'btn btn-outline-primary'
     - else
       div 現在、予約枠は登録されていません
