@@ -1,20 +1,20 @@
 - if signed_in?
-  div class="signed_in"
+  div class='signed_in'
     = render 'sessions/signed_in'
-    div class="mx-5"
-      ul class="nav flex-column pb-4"
-        li class="nav-item mb-3"
-          = link_to "予約枠作成フォームへ >", new_reservation_frame_path, class: "text-decoration-none"
+    div class='mx-5'
+      ul class='nav flex-column pb-4'
+        li class='nav-item mb-3'
+          = link_to '予約枠作成フォームへ >', new_reservation_frame_path, class: 'text-decoration-none'
 
-      h2 class="fw-bold pb-1" 予約枠一覧
+      h2 class='fw-bold pb-1' 予約枠一覧
 
       - if current_user
-        table class="table text-center"
+        table class='table text-center'
           tr
-            th scope="col" 開始日時
-            th scope="col" 予約状況
-            th scope="col" 公開切替ボタン
-            th scope="col" 削除ボタン
+            th scope='col' 開始日時
+            th scope='col' 予約状況
+            th scope='col' 公開切替ボタン
+            th scope='col' 削除ボタン
           - current_user.reservation_frames.after_current_time.sort_reserved_at_asc.map do |f| 
             tr
               td = l(f[:reserved_at], format: :default)
@@ -23,18 +23,18 @@
                   span = f.reservations[0].client.name
                 - else
                   | 空き
-              td class="h5"
+              td class='h5'
                 - if f.status == 'ok'
-                  span class="badge rounded-pill bg-primary mx-3" 公開中
+                  span class='badge rounded-pill bg-primary mx-3' 公開中
                 - else
-                  span class="badge rounded-pill bg-secondary mx-3" 未公開
-                = link_to "変更する", reservation_frame_path(f), method: :put, class: "btn btn-outline-success"
-              td = link_to "削除する", reservation_frame_path(f), method: :delete, data: {confirm: "本当に削除しますか?"}, class: "btn btn-outline-danger"
+                  span class='badge rounded-pill bg-secondary mx-3' 未公開
+                = link_to '変更する', reservation_frame_path(f), method: :put, class: 'btn btn-outline-success'
+              td = link_to '削除する', reservation_frame_path(f), method: :delete, data: {confirm: '本当に削除しますか?'}, class: 'btn btn-outline-danger'
       - else
         div 現在、予約枠は登録されていません
 
 - else
-  div class="form-sign"
+  div class='form-sign'
     = render 'sessions/not_signed_in'
-    h2 class="fw-bold" 登録
-    div = link_to "プランナー登録へ", new_planner_path, class: "text-decoration-none"
+    h2 class='fw-bold' 登録
+    div = link_to 'プランナー登録へ', new_planner_path, class: 'text-decoration-none'
