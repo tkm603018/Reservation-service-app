@@ -1,19 +1,15 @@
-h1 = link_to "ホームへ", reservation_frames_path
+h1 class="navbar-brand fs-2 fw-bold p-3"
+  = link_to "ホーム", reservation_frames_path, class: "text-decoration-none"
 
-h2 プランナー作成フォーム
-
-= form_for(:planner, url: planners_path) do |f|
-  div
-    = f.label :email, "メール"
-    p
-      = f.email_field :email
-  div
-    = f.label :password, "パスワード"
-    p
-      = f.password_field :password, required: true
-  div
-    = f.label :password_confirmation, "確認用パスワード"
-    p
-      = f.password_field :password_confirmation, required: true
-  div
-    = f.submit "サインアップ"
+= form_for(:planner, url: planners_path, html: { class: "form-sign" }) do |f|
+  h4 class="fw-bold pb-1" プランナー作成フォーム
+  div class="form-floating mb-3"
+    = f.email_field :email, class: "form-control", id: "floatingInput", placeholder: "Email", required: true
+    = f.label "Email", for: "floatingInput"
+  div class="form-floating mb-3"
+    = f.password_field :password, class: "form-control", id: "floatingPassword", placeholder: "Password", required: true
+    = f.label :password, for: "floatingPassword"
+  div class="form-floating mb-5"
+    = f.password_field :password_confirmation, class: "form-control", id: "floatingPasswordConfirmation", placeholder: "PasswordConfirmation", required: true
+    = f.label :password_confirmation, for: "floatingPasswordConfirmation"
+  = f.submit "登録する", class: "btn btn-lg btn-primary"
