@@ -18,11 +18,19 @@ module SessionsHelper
     @current_user = nil
   end
 
-  def user_path
+  def user_root_path
     if current_user.is_client?
       reservations_path
     elsif current_user.is_planner?
       reservation_frames_path
     end
+  end
+
+  def users_path
+    "/#{current_user.type.downcase}s"
+  end
+
+  def user_path
+    "#{users_path}/#{current_user.id}"
   end
 end
