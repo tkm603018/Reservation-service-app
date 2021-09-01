@@ -1,19 +1,19 @@
 = render 'sessions/signed_in'
-div class="mx-5"
-  h2 class="fw-bold pb-1" 予約枠作成フォーム
-  = form_for(:reservation_frame, url: "/reservation_frames", html: { class: "form-sign" }) do |f|
-    div class="form-floating mb-4"
-      = f.date_field :reserved_date, value: "%m:%d", class: "form-control", id: "floatingDateField", required: true
-      = f.label "日付", for: "floatingDateField"
-    div class="form-floating mb-4"
-      = f.select :time_frame, def_time_frame, {}, class: "form-select", id: "floatingSelect", required: true
-      = f.label "時刻", for: "floatingSelect"
+div class='mx-5'
+  h2 class='fw-bold pb-1' 予約枠作成フォーム
+  = form_for(:reservation_frame, url: '/reservation_frames', html: { class: 'form-sign' }) do |f|
+    div class='form-floating mb-4'
+      = f.date_field :reserved_date, value: '%m:%d', class: 'form-control', id: 'floatingDateField', required: true
+      = f.label '日付', for: 'floatingDateField'
+    div class='form-floating mb-4'
+      = f.select :time_frame, def_time_frame, {}, class: 'form-select', id: 'floatingSelect', required: true
+      = f.label '時刻', for: 'floatingSelect'
       
-    div class="py-1 mb-5" 
-      span class="fw-bold py-1" ユーザー側での公開設定
+    div class='py-1 mb-5' 
+      span class='fw-bold py-1' ユーザー側での公開設定
       p
-        = f.radio_button :status, "ok", class: "form-check-input px-1", required: true
-        = f.label "公開する", class: "form-check-label px-1"
-        = f.radio_button :status, "ng", class: "form-check-input px-1", required: true
-        = f.label "非公開にする", class: "form-check-label px-1"
-    = f.submit "登録する", class: "btn btn-lg btn-primary"
+        = f.radio_button :status, 'ok', class: 'form-check-input px-1', required: true
+        = f.label '公開する', class: 'form-check-label px-1'
+        = f.radio_button :status, 'ng', class: 'form-check-input px-1', required: true
+        = f.label '非公開にする', class: 'form-check-label px-1'
+    = f.submit '登録する', class: 'btn btn-lg btn-primary'
