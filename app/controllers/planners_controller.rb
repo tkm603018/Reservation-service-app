@@ -31,11 +31,16 @@ class PlannersController < ApplicationController
 
   def update
     planner = Planner.find(params[:id])
-    if planner&.update(name: params[:user][:name])
+    if planner&.update(planner_params)
       redirect_to request.referer, notice: '氏名を変更しました'
     else
       redirect_to request.referer, alert: '氏名を変更できませんでした 15文字以内で記入してください'
     end
   end
 
+  private
+
+  def planner_params
+    params.permit(:name)
+  end
 end
