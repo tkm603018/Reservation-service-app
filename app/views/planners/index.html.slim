@@ -1,21 +1,21 @@
 - if signed_in?
   = render 'sessions/signed_in'
-  div class="mx-5"
-    h2 class="fw-bold pb-1" プランナー一覧
+  div class='mx-5'
+    h2 class='fw-bold pb-1' プランナー一覧
 
     - if @planners.present?
-      table class="table"
+      table class='table'
         tr
-          th scope="col" Email
-          th scope="col" 氏名
-          th scope="col" リンク
+          th scope='col' Email
+          th scope='col' 氏名
+          th scope='col' リンク
         - @planners.map do |p|
           tr
             td = p.email
             td = p.name
-            td = link_to "予約枠一覧へ >", planner_path(p), class: "text-decoration-none"
+            td = link_to '予約枠一覧へ >', planner_path(p), class: 'text-decoration-none'
 - else
-  div class="not_signed_in text-center"
+  div class='not_signed_in text-center'
     = render 'sessions/not_signed_in'
-    h2 class="fw-bold" 登録
-    div = link_to "プランナー登録へ", new_planner_path, class: "text-decoration-none"
+    h2 class='fw-bold' 登録
+    div = link_to 'プランナー登録へ', new_planner_path, class: 'text-decoration-none'
