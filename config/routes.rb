@@ -3,8 +3,8 @@ Rails.application.routes.draw do
   root to: 'reservations#index'
   resources :reservations, only: [:index, :new, :create, :destroy]
   resources :reservation_frames, only: [:index, :new, :create, :destroy, :update]
-  resources :clients, only: [:show, :new, :create]
-  resources :planners, only: [:index, :show, :new, :create]
+  resources :clients, only: [:show, :new, :create, :update]
+  resources :planners, only: [:index, :show, :new, :create, :update]
   resources :sessions, only: [:create, :destroy]
   resource :user_profile, only: [:show]
 end

@@ -25,4 +25,19 @@ class ClientsController < ApplicationController
       redirect_to reservations_path, alert: client.errors.messages
     end
   end
+
+  def update
+    client = Client.find(params[:id])
+    if client&.update(client_params)
+      redirect_to request.referer, notice: '氏名を変更しました'
+    else
+      redirect_to request.referer, alert: '氏名を変更できませんでした 15文字以内で記入してください'
+    end
+  end
+
+  private
+
+  def client_params
+    params.permit(:name)
+  end
 end
