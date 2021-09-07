@@ -20,7 +20,7 @@ module SessionsHelper
 
   def user_root_path
     return request.referer if current_user.blank?
-    
+
     if current_user.is_client?
       reservations_path
     elsif current_user.is_planner?
@@ -29,10 +29,10 @@ module SessionsHelper
   end
 
   def users_path
-    "/#{current_user.type.downcase}s"
+    current_user.is_client? ? clients_path : planners_path
   end
 
   def user_path
-    "#{users_path}/#{current_user.id}"
+    current_user.is_client? ? client_path(current_user) : planner_path(current_user)
   end
 end
