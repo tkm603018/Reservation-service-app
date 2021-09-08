@@ -23,6 +23,8 @@ class ReservationFramesController < ApplicationController
       flash[:alert] = '予約日時が範囲外です' if @start_at < st || @start_at > en
     end
 
+    return redirect_to request.referer if flash[:alert]
+    
     reservation_frame = current_user.reservation_frames.build(
       reserved_at: @start_at,
       status: args[:status],
