@@ -37,7 +37,7 @@ Things you may want to cover:
       <thead>
           <tr>
               <th><h2 align="center">クライアントログイン時</h2></th>
-              <th><h2 align="center">クライアントログイン時</h2></th>
+              <th><h2 align="center">プランナーログイン時</h2></th>
           </tr>
       </thead>
       <tbody>
@@ -59,15 +59,15 @@ Things you may want to cover:
   📖 アプリの概要
 </h1>
 
-このアプリは, クライアントがファイナンシャルプランナー（以下プランナー）に相談できる予約サービスです
+このアプリは, クライアントがファイナンシャルプランナーに相談できる予約サービスです
 
 ## **アプリの要件** 📚
 - ## **ユーザーについて**
-  2種類のユーザーが存在する(STI: 単一テーブル継承)
+  2種類のユーザーが存在する
 
   **クライアント**: 予約枠を予約する側
 
-  **プランナー**: 予約枠を作成する側
+  **ファイナンシャルプランナー**: 予約枠を作成する側
 
 - ## **予約枠について**
   ```
@@ -77,14 +77,14 @@ Things you may want to cover:
   日曜日: 休業日
   ```
 - ## **予約までの流れについて**
-  1. プランナーが予約を受け付ける枠を作成
-  2. クライアントが, プランナーの空いている枠を予約する
+  1. ファイナンシャルプランナーが予約を受け付ける枠を作成
+  2. クライアントが, ファイナンシャルプランナーの空いている枠を予約する
 - ## **各ユーザーができるアクション**
   - **クライアント** 側
   
     - 予約枠を予約
 
-  - **プランナー** 側
+  - **ファイナンシャルプランナー** 側
   
     - 予約枠を作成
 
@@ -95,12 +95,35 @@ Things you may want to cover:
     - ユーザー登録
 
 ## **開発内容** 🛠
+  - ## **ユーザーについて**
+
+    ❗️開発したアプリ側ではユーザーの名称を以下のように定義しています
+
+    - **client(クライアント): クライアント**
+
+    - **planner(プランナー): ファイナンシャルプランナー**
+
+
   - ## **作成したテーブル**
     <center>
-      <h2 align="center">ER図</h2>
-      <div>
-        <img width="300" alt="ER図" src="https://user-images.githubusercontent.com/51039761/133214119-5f08acb2-8e60-49ad-ba08-e150b1486855.jpg">
-      </div>
+      <table>
+          <thead>
+              <tr>
+                  <th><h2 align="center">ER図</h2></th>
+                  <th><h2 align="center">テーブルの詳細</h2></th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr>
+                  <td>
+                    <img width="300" alt="ER図" src="https://user-images.githubusercontent.com/51039761/133214119-5f08acb2-8e60-49ad-ba08-e150b1486855.jpg">
+                  </td>
+                  <td>
+                    <img width="300" alt="各テーブルの構成" src="https://user-images.githubusercontent.com/51039761/133227851-0ca247b9-5f12-4bd0-a3ab-6155335c722c.png">
+                  </td>
+              </tr>
+          </tbody>
+      </table>
     </center>
 
   - ## **機能開発表**
